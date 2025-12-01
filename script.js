@@ -14,11 +14,13 @@ const bands = [
   'An Old Dog'
 ];
 
-// Remove A, AN, THE
-const strip = band => band.replace(/^(the |an |a )/i, '');
+function stripArticle(str) {
+  return str.replace(/^(a |an |the )/i, '').trim();
+}
 
-const sorted = bands.sort((a, b) => strip(a) > strip(b) ? 1 : -1);
+const sortedBands = bands.sort((a, b) => {
+  return stripArticle(a) > stripArticle(b) ? 1 : -1;
+});
 
-// Render
-document.querySelector('#band').innerHTML =
-  sorted.map(b => `<li>${b}</li>`).join('');
+document.getElementById('bands').innerHTML =
+  sortedBands.map(b => `<li>${b}</li>`).join('');
